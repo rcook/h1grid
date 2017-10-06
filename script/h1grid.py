@@ -10,15 +10,26 @@ from h1gridlib.artifactory import ArtifactoryItem
 from h1gridlib.component_info import ComponentInfo
 from h1gridlib.env import EnvDefault
 
+def _dump_folder(folder, depth=0):
+    indent = "  " * depth
+    print("{}{} (folder)".format(indent, folder.pretty_path))
+    print("{}  API: {}".format(indent, folder.api_url))
+
+    for child in folder.files:
+        print("{}  {} (file)".format(indent, child.pretty_path))
+        print("{}    API: {}".format(indent, child.api_url))
+        print("{}    Download: {}".format(indent, child.download_url))
+
+    for child in folder.folders:
+        _dump_folder(child, depth + 1)
+
 def _main_inner(args):
     component_info = ComponentInfo(
         args.api_key,
         args.base_url,
         args.component_path)
-
-    item = ArtifactoryItem(component_info)
-    for f in item.get_folders():
-        print(f.paths)
+    root_folder = ArtifactoryItem(component_info)
+    _dump_folder(root_folder)
 
 def _main():
     parser = argparse.ArgumentParser(description="h1grid tool")
