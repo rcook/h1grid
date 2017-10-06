@@ -24,12 +24,6 @@ class ArtifactoryItem(object):
         self._obj = None
 
     @property
-    def paths(self): return list(self._paths)
-
-    @property
-    def pretty_path(self): return self._pretty_path
-
-    @property
     def api_url(self): return self._api_url
 
     @property

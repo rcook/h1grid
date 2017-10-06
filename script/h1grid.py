@@ -12,12 +12,10 @@ from h1gridlib.env import EnvDefault
 
 def _dump_folder(folder, depth=0):
     indent = "  " * depth
-    print("{}{} (folder)".format(indent, folder.pretty_path))
-    print("{}  API: {}".format(indent, folder.api_url))
+    print("{}folder: {}".format(indent, folder.api_url))
 
     for child in folder.files:
-        print("{}  {} (file)".format(indent, child.pretty_path))
-        print("{}    API: {}".format(indent, child.api_url))
+        print("{}  file: {}".format(indent, child.api_url))
         print("{}    Download: {}".format(indent, child.download_url))
 
     for child in folder.folders:
