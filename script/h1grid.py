@@ -6,8 +6,7 @@
 from __future__ import print_function
 import argparse
 
-from h1gridlib.artifactory import ArtifactoryItem
-from h1gridlib.component_info import ComponentInfo
+from h1gridlib.artifactory import ArtifactoryRepo
 from h1gridlib.env import EnvDefault
 
 def _dump_folder(folder, depth=0):
@@ -22,12 +21,11 @@ def _dump_folder(folder, depth=0):
         _dump_folder(child, depth + 1)
 
 def _main_inner(args):
-    component_info = ComponentInfo(
+    repo = ArtifactoryRepo(
         args.api_key,
-        args.base_url,
-        args.component_path)
-    root_folder = ArtifactoryItem(component_info)
-    _dump_folder(root_folder)
+        args.base_url)
+    root = repo.fetch(args.path)
+    _dump_folder(root)
 
 def _main():
     parser = argparse.ArgumentParser(description="h1grid tool")
@@ -44,9 +42,9 @@ def _main():
         env_var="H1GRID_API_KEY",
         help="API key")
     parser.add_argument(
-        "component_path",
-        metavar="COMPONENTPATH",
-        help="Component path")
+        "path",
+        metavar="PATH",
+        help="Object path")
     args = parser.parse_args()
     _main_inner(args)
 
