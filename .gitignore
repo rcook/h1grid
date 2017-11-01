@@ -1,6 +1,5 @@
 /.eggs/
 /build/
 /dist/
-/env/
 /h1grid.egg-info/
 *.pyc

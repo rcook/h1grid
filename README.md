@@ -6,10 +6,6 @@ Python tool for interacting with [h1grid][h1grid] repository
 
 ```
 git clone https://github.com/rcook/h1grid.git
-cd h1grid
-script/virtualenv
-script/env pip install -e .
-script/env h1grid --version
 ```
 
 ## Licence
